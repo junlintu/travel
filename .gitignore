@@ -1,0 +1,2 @@
+#ignore packages installed by np
+node_modules
