@@ -1,0 +1,31 @@
+{
+  "name": "travel",
+  "version": "1.0.0",
+  "description": "travel of tech",
+  "main": "travel.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express3-handlebars": "^0.5.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junlintu/travel.git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "junlintu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/junlintu/travel/issues"
+  },
+  "homepage": "https://github.com/junlintu/travel#readme"
+}

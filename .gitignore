@@ -1,2 +1,3 @@
 #ignore packages installed by np
 node_modules
+.DS_Store
