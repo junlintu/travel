@@ -1,5 +1,14 @@
-var express = require('express');
+var http = require('http'),
+	https = require('https'),
+	express = require('express'),
+	fortune = require('./lib/fortune.js'),
+	formidable = require('formidable'),
+	fs = require('fs'),
+	vhost = require('vhost'),
+	Q = require('q'),
+	Article = require('./models/article.js');
 var app = express();
+var credentials = require('./credentials.js');
 //设置handlebars视图引擎
 var handlebars = require('express3-handlebars').create({defaultLayout:'main'});
 app.engine('handlebars', handlebars.engine);
@@ -8,8 +17,52 @@ app.set('view engine', 'handlebars');
 var fortune = require('./lib/fortune.js');
 
 app.set('port', process.env.PORT || 3000);
-app.use(express.static('../' + 'public'));
+app.use(express.static(__dirname + '/public'));
+app.use(require('body-parser')());
 
+// database configuration
+var mongoose = require('mongoose');
+var options = {
+    server: {
+       socketOptions: { keepAlive: 1 } 
+    }
+};
+switch(app.get('env')){
+    case 'development':
+        mongoose.connect(credentials.mongo.development.connectionString, options);
+        break;
+    case 'production':
+        mongoose.connect(credentials.mongo.production.connectionString, options);
+        break;
+    default:
+        throw new Error('Unknown execution environment: ' + app.get('env'));
+}
+// initialize articles
+Article.find(function(err, articles){
+    if(articles.length) return;
+
+    new Article({
+        title: 'javascript高级程序设计',
+        date: '2016-09-19 18:04',
+        description: 'javascript高级程序设计——笔记基本概念 基本数据类型包括Undefined/Null/Boolean/Number和String 无须指定函数的返回值，实际上，未指定返回值的函数返回的是一个特殊的undefined值 变量、作用域和内存问题 基本类型值在内存中占据固定大小的空间，因此保存在栈内存中 引用类型的值是对象，保存在堆内存中 确定一个值是哪种基本类型用typeof，确定一个值是哪种...',
+        href: 'https://github.com/junlintu/junlintu.github.io/blob/master/javascript.md',
+        tags: ['javascript'],
+        view: 670,
+        available: true,
+    }).save();
+
+    new Article({
+        title: 'Node.js笔记',
+        date: '2016-09-19 16:26',
+        description: 'Node.js模块和包管理Node.js框架使用模块和包来组织管理，参照CommonJS标准。 核心模块 最底层是Google V8 JavaScript引擎，之上是基于C/C++语言实现的核心模块、并提供向上的接口，在最上层用JavaScript语言对这些接口进行封装、再向外提供给用户使用这些核心模块。在Node.js框架安装好后，这些核心模块以编译好的二进制形式作为框架原生的组合部分存在，req...',
+        href: 'https://github.com/junlintu/junlintu.github.io/blob/master/node.md',
+        tags: ['node','javascript'],
+        view: 670,
+        available: true,
+    }).save();
+
+    
+});
 app.use(function(req, res, next){
 	res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
 	next();
@@ -17,7 +70,22 @@ app.use(function(req, res, next){
 app.get('/', function(req, res){
 	// res.type('text/plain');
 	// res.send('Technology Travel');
-	res.render('home');
+	Article.find({available:true}, function(err, articles){
+		var context = {
+			articles:articles.map(function(article){
+				return {
+					title:article.title,
+					date:article.date,
+					description:article.description,
+					href:article.href,
+					tags:article.tags,
+					view:article.view,
+				}
+			})
+		};
+		res.render('home', context);
+	});
+	
 });
 app.get('/about', function(req, res){
 	// res.type('text/plain');

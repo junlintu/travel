@@ -6,23 +6,220 @@
 		<link rel="stylesheet" type="text/css" href="/vendor/mocha.css">
 	{{/if}}
 	<script type="text/javascript" src="//code.jquery.com/jquery-2.0.2.min.js"></script>
+	<style type="text/css">
+	body, dl, dd, h1, h2, h3, h4, h5, h6, p, form{margin:0;}   
+	ol,li,ul{margin:0; padding:0;}
+	.output {
+    	padding-left: 45px;
+	}
+	body {
+	    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+	    font-size: 14px;
+	    line-height: 20px;
+	    color: #555555;
+	    background-color: white;
+	}
+	a {
+    color: #555555;
+    text-decoration: none;
+}
+a:hover, a:active {
+    outline: 0;
+}
+
+.fluid {
+	padding-left: 45px;
+}
+.btn {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #3f3f3f;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    background-color: whitesmoke;
+    background-image: -moz-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top, #fff, #e6e6e6);
+    background-image: -o-linear-gradient(top, #fff, #e6e6e6);
+    background-image: linear-gradient(to bottom, #fff, #e6e6e6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFE6E6E6', GradientType=0);
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border: 1px solid #cccccc;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+}
+.btn-large {
+    padding: 11px 19px;
+    font-size: 17.5px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+.btn-success {
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: #5bb65b;
+    background-image: -moz-linear-gradient(top, #62c462, #51a351);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
+    background-image: -webkit-linear-gradient(top, #62c462, #51a351);
+    background-image: -o-linear-gradient(top, #62c462, #51a351);
+    background-image: linear-gradient(to bottom, #62c462, #51a351);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF62C462', endColorstr='#FF51A351', GradientType=0);
+    border-color: #51a351 #51a351 #387038;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn:hover, .btn:focus {
+    color: #3f3f3f;
+    text-decoration: none;
+    background-position: 0 -15px;
+    -webkit-transition: background-position 0.1s linear;
+    -moz-transition: background-position 0.1s linear;
+    -o-transition: background-position 0.1s linear;
+    transition: background-position 0.1s linear;
+}
+.btn-success:hover, .btn-success:focus {
+        color: white;
+    border-color: #6bd95b;
+    background-color: #6bd95b;
+}
+.left-aside .btn-success, .left-aside .btn-success:hover {
+    margin-top: 10px;
+    font-size: 16px;
+}
+.left-aside .bottom-block .btn-success {
+    padding-left: 34px;
+    background-position: -104px -20px;
+    background-image: url(http://cdn-qn0.jianshu.io/assets/sprite-1d28b1a5e9c3a6854a8c262666504212.png);
+    background-image: url(http://cdn-qn0.jianshu.io/assets/sprite_for_ie-cc644caf48613f506878d8876df45eff.png) \9;
+    background-repeat: no-repeat;
+    background-size: 250px;
+}
+
+
+
+	.navbar-user {
+		position: fixed;
+		top: 10px;
+		right: 0;
+
+	}
+	.navbar-user .login {
+    position: relative;
+    top: 7px;
+    float: right;
+    padding: 0 2px;
+    margin-right: 8px;
+}
+	.navbar {
+		left: 0;
+		top: 0;
+		height: 100%;
+		background: #2a2a2a;
+		position: fixed;
+		width: 45px;
+	}
+	.navbar a {
+		    display: block;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center;
+	}
+	.navbar a.logo {
+    font-size: 18px;
+    color: white;
+}
+.menubar a.active {
+	    background-color: #e78170;
+    color: white;
+    text-shadow: 0 1px 0 #de533a;
+}
+footer {
+	    padding: 8px 0 10px 25%;
+    border-top: 1px solid #d9d9d9;
+    overflow: hidden;
+    color: #999999;
+    box-sizing: border-box;
+    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 20px;
+}
+.footer-l {
+    float: left;
+    margin-left: 25px;
+}
+
+	</style>
 </head>
-<body>
-<header><img src="/img/logo.jpg" alt="Techology Travel Logo"></header>
-{{{body}}}
-{{#if showTests}}
-	<div id="mocha"></div>
-	<script type="text/javascript" src="/vendor/mocha.js"></script>
-	<script type="text/javascript" src="/vendor/chai.js"></script>
-	<script type="text/javascript">
-		mocha.ui('tdd');
-		var assert = chai.assert;
-	</script>
-	<script type="text/javascript" src="/qa/tests-global.js"></script>
-	{{#if pageTestScript}}
-		<script type="text/javascript" src="{{pageTestScript}}"></script>
+<body class="fluid">
+	<div class="navbar-user">
+		<a class="login">
+			<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" viewBox="0 0 150 192">
+                <g fill="#c3c3d8">
+                    <title>account</title>
+                    <ellipse stroke="null" ry="43.5" rx="36.99995" id="svg_2" cy="45.49873" cx="74.99913" stroke-opacity="null" stroke-width="null" />
+                    <path stroke="null" id="svg_3" d="m21.49903,191.49108c0,0 105,-1.01127 105,-1.01127c12.99873,1.01117 12,-1.01126 12,-1.01126c1.49986,2.52792 11,-43.48448 11,-43.48448c-6,-45.507 -72,-43.48447 -72,-43.48447c-67.49975,-2.02214 -76,38.42814 -76,38.42814c0,0 4.50044,58.14809 20,50.56334z" stroke-opacity="null" stroke-width="null" />
+                </g>
+            </svg>注册
+		</a>
+		<a class="login">
+			<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" viewBox="0 0 270 172">
+                <g fill="#c3c3d8">
+                    <title>forum</title>
+                    <rect rx="14" ry="14" stroke="null" x="2.47261" y="2.49882" width="202" height="139" id="svg_4" />
+                    <path stroke="null" d="m85.47261,173.49894c0,0 50,-33 50,-33c0,0 -51,-1 -51,-1c0,0 1,34 1,34z" id="svg_6" />
+                    <path stroke="null" d="m215.00892,53.99981c0,0 0,67.49996 0,67.49996c0,0 -0.75,7 -3.49999,13c-2.75,5.99999 -6.25079,9.50094 -7.5,10.99999c0.74953,-1.24921 15.99999,-0.25 14.49999,-1.5c-1.5,-1.25 28.99999,26.49999 28.99999,26.49999c0,0 -1,-24.99999 -1,-24.99999c0,0 14.49999,-0.5 14.49999,-0.5c6.49591,-0.24984 7.5,-9.49999 7.5,-9.49999c0,0 0.99999,-72.99996 0.99999,-72.99996c-2.49842,-9.24418 -9.49999,-8.5 -9.49999,-8.5c0,0 -2.8125,0 -7.03125,0c-4.21874,0 -9.84374,0 -15.46874,0c-5.625,0 -11.24999,0 -15.46874,0c-4.21875,0 -7.03125,0 -7.03125,0z" id="svg_11" />
+                    <ellipse fill="#ffffff" stroke-width="null" cx="59.5" cy="72.5" id="svg_8" rx="13" ry="13" stroke="null" />
+                    <ellipse fill="#ffffff" stroke-width="null" cx="107.5" cy="73.5" id="svg_9" rx="13" ry="13" stroke="null" />
+                    <ellipse fill="#ffffff" stroke-width="null" cx="155.5" cy="72.5" id="svg_10" rx="13" ry="13" stroke="null" />
+                </g>
+            </svg>登录
+		</a>
+	</div>
+	<div class="navbar">
+		<div class="menubar">
+			<a class="logo active">文</a>
+		</div>
+	</div>
+	{{{body}}}
+	<footer>
+		<div class="footer-l">
+			<p>
+		      <a href="" target="_blank">关于</a> |
+		      <a target="_blank" href="/contact">联系我</a> |
+		    </p>
+		</div>
+		<div class="footer-r"></div>
+	</footer>
+	{{#if showTests}}
+		<div id="mocha"></div>
+		<script type="text/javascript" src="/vendor/mocha.js"></script>
+		<script type="text/javascript" src="/vendor/chai.js"></script>
+		<script type="text/javascript">
+			mocha.ui('tdd');
+			var assert = chai.assert;
+		</script>
+		<script type="text/javascript" src="/qa/tests-global.js"></script>
+		{{#if pageTestScript}}
+			<script type="text/javascript" src="{{pageTestScript}}"></script>
+		{{/if}}
+		<script type="text/javascript">mocha.run();</script>
 	{{/if}}
-	<script type="text/javascript">mocha.run();</script>
-{{/if}}
 </body>
 </html>

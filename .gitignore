@@ -1,4 +1,5 @@
 #ignore packages installed by np
 node_modules
 data
+credentials.js
 .DS_Store
