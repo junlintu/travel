@@ -1,16 +1,8 @@
 {
   "name": "travel",
   "version": "1.0.0",
-  "description": "travel of tech",
+  "description": "technology travel",
   "main": "travel.js",
-  "dependencies": {
-    "express": "^4.14.0",
-    "express3-handlebars": "^0.5.2"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.1.2"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,8 +11,7 @@
     "url": "git+https://github.com/junlintu/travel.git"
   },
   "keywords": [
-    "node",
-    "express"
+    "nodejs"
   ],
   "author": "junlintu",
   "license": "MIT",

@@ -13,7 +13,7 @@ app.use(express.static('../' + 'public'));
 app.use(function(req, res, next){
 	res.locals.showTests = app.get('env') !== 'production' && req.query.test === '1';
 	next();
-})
+});
 app.get('/', function(req, res){
 	// res.type('text/plain');
 	// res.send('Technology Travel');
@@ -22,7 +22,7 @@ app.get('/', function(req, res){
 app.get('/about', function(req, res){
 	// res.type('text/plain');
 	// res.send('About Technology Travel');
-	res.render('about', {fortune: fortune.getFortune()});
+	res.render('about', {fortune: fortune.getFortune(),pageTestScript:'/qa/tests-about.js'});
 });
 //404
 app.use(function(req, res){
