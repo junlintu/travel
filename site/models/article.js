@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var articleSchema = mongoose.Schema({
+	articleId: Number,
     title: String,
     date: Date,
     description: String,
@@ -8,6 +9,7 @@ var articleSchema = mongoose.Schema({
     tags: [String],
     view: Number,
     available: Boolean,
+    content:String,
 });
 var Article = mongoose.model('article', articleSchema);
 module.exports = Article;

@@ -3,10 +3,13 @@ var http = require('http'),
 	express = require('express'),
 	fortune = require('./lib/fortune.js'),
 	formidable = require('formidable'),
+	common = require('./lib/common'),
 	fs = require('fs'),
 	vhost = require('vhost'),
 	Q = require('q'),
 	Article = require('./models/article.js');
+	markdown = require( "markdown" ).markdown;
+
 var app = express();
 var credentials = require('./credentials.js');
 //设置handlebars视图引擎
@@ -86,6 +89,44 @@ app.get('/', function(req, res){
 		res.render('home', context);
 	});
 	
+});
+app.get('/mdeditor', function(req, res){
+	res.render('write', null);
+});
+app.post('/publish', function(req, res){
+	Article.find(function(err, articles){
+		console.log(req);
+		var articleId = new Date().getTime();
+	    new Article({
+	    	articleId: articleId,
+	        title: req.body.title,
+	        date: common.dateFormat(new Date(),'yyyy-MM-dd hh:mm'),
+	        description: req.body.mdeditor.substr(0,100),
+	        href: req.headers['hose'] + '/' + articleId,
+	        tags: [''],
+	        view: 0,
+	        available: true,
+	        content: req.body.mdeditor,
+	    }).save();
+
+	});
+	res.redirect(303, '/');
+});
+app.get('/article/*', function(req, res){
+	Article.find({articleId:req.path.match(/\/(\d+)\/?$/)[1]}, function(err, articles){
+		var context = {
+					title:articles[0].title,
+					date:articles[0].date,
+					description:articles[0].description,
+					href:articles[0].href,
+					tags:articles[0].tags,
+					view:articles[0].view,
+					content:markdown.toHTML(articles[0].content),
+			
+		};
+		console.log(context.content);
+		res.render('article', context);
+	});
 });
 app.get('/about', function(req, res){
 	// res.type('text/plain');

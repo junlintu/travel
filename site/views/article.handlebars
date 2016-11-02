@@ -1,0 +1,59 @@
+<style>
+	.article-content {
+		padding: 65px 20px 35px;
+    	background: #fff;
+	}
+	.article-content * {
+		box-sizing: border-box;
+	}
+.article_manage {
+    margin-bottom: 10px;
+    color: #999;
+    font: normal 12px/22px Arial;
+    text-align: right;
+    border-bottom: solid 1px #ededed;
+    padding: 0 20px 5px;
+    overflow: hidden;
+}
+
+.article_l {
+    width: 100%;
+    text-align: left;
+    padding-left: 35px;
+}
+.article_manage a {
+    color: #c88326;
+}
+.article_manage span {
+	margin: 0 16px 0 5px;
+}
+
+</style>
+<h1 class="article-title">{{title}}</h1>
+<div class="article_manage">
+	<div class="article_l">
+		<span class="tags">标签：</span>
+		{{#each tags}}
+		<a href="" class="tag">{{tag}}</a>
+		{{/each}}
+	</div>
+	<div class="article_r">
+		<span class="postdate">{{date}}</span>
+		<svg height="10" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" viewBox="0 0 31 19">
+                  <g>
+                  <title>pv</title>
+                  <ellipse ry="7.91631" rx="14.16602" id="svg_2" cy="9.40771" cx="15.65152" fill="#c3c3d8" stroke="null"></ellipse>
+                  <ellipse stroke="#fff" fill="transparent" stroke-width="3.4" cx="15.40859" cy="9.4078" id="svg_4" rx="4.24988" ry="4.2499"></ellipse>
+                  </g></svg>
+		<span class="view">{{view}}人阅读</span>
+		<span class="edit">
+			<a href="" title="编辑">编辑</a>
+		</span>
+		<span class="delete">
+			<a href="" title="删除">删除</a>
+		</span>
+	</div>
+</div>
+<div class="article-content">
+	{{{content}}}
+</div>
